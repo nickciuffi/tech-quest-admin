@@ -2,6 +2,8 @@ import React, {useEffect, useContext} from 'react';
 import { CtxProps, logInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
+import { SideNav } from '../../components/SideNav';
+import './styles.scss';
 
 export function MainPage(){
 
@@ -19,8 +21,9 @@ export function MainPage(){
 	return (
 		<>
 			<Header />
-		
-			<form><div>Salv</div></form>
+			<SideNav />
+			<div className='main-container'><form><div>Salv {logData.name}</div></form></div>
+			
 		</>
 	);
 }

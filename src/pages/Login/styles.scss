@@ -1,11 +1,14 @@
 .container{
-    height: calc(100% - 70px);
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding-top:110px;
 
+    small{
+        color: rgb(192, 191, 191);
+    }
+   
     #form{
         width: 70%;
     }

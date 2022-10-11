@@ -6,33 +6,49 @@ import { Header } from '../../components/Header';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './styles.scss';
+import {tryLogin} from '../../data/login';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export function LogIn(){
 
 	const {logData, setLogData} = useContext(logInfo) as CtxProps;
 	const navigate = useNavigate();
 
+	async function handleLogin(e: React.FormEvent<HTMLFormElement>){
+		e.preventDefault();
+		
+		const form = e.target as HTMLFormElement;
+		const email = form.querySelector('#input-email') as HTMLInputElement;
+		const password = form.querySelector('#input-password') as HTMLInputElement;	
+		if(typeof email.value !== 'string' || typeof password.value !== 'string') return;
+		if(!email.value) return toast.error('You have to send an email');
+		if(!password.value) return toast.error('You have to send a password');
+		const resultLogin = await tryLogin(email.value, password.value);
+		if(typeof resultLogin === 'string') return toast.error(resultLogin);
+		setLogData({
+			email: resultLogin.email,
+			name: resultLogin.name
+		});
+		setTimeout(() => navigate('/'), 500);
+	}
+
 	return(
 		<>
 			<Header />
 			<div className='container'>
 				<h1>Login</h1>
-				<Form id="form" onSubmit={() => {
-					setLogData({
-						name: 'nicolas',
-						email: 'nicolasciuffi'
-					
-					});
-					navigate('/');
-				}
-				}>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
+				<Form id="form" onSubmit={(e) => handleLogin(e)}>
+					<Form.Group className="mb-3" controlId="input-email">
 						<Form.Label>Email</Form.Label>
 						<Form.Control type="email" placeholder="Enter email" />
 						
 					</Form.Group>
 
-					<Form.Group className="mb-3" controlId="formBasicPassword">
+					<Form.Group className="mb-3" controlId="input-password">
 						<Form.Label>Password</Form.Label>
 						<Form.Control type="password" placeholder="Password" />
 					</Form.Group>
@@ -41,12 +57,13 @@ export function LogIn(){
 						Submit
 					</Button>
 					<Form.Group className="mt-3">
-						<Form.Text>Doesn`t have an acount? <Link to={'/register'}>Register</Link></Form.Text>
+						<Form.Text>Don`t have an acount? <Link to={'/register'}>Register</Link></Form.Text>
 					</Form.Group>
 
 				</Form>
 
 			</div>
+			<ToastContainer />
 		</>
 
 	);
