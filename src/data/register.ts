@@ -1,22 +1,23 @@
 import api from '../axios/config';
+import { AxiosError, AxiosResponse }from 'axios';
 
 type RegisterProps = {
     email: string,
     name: string
  }
 
-export const register = async (email: string, password: string, name: string): Promise<string> =>{
+export const register = async (email: string, password: string, name: string): Promise<AxiosResponse<string> | string> =>{
 	try{
-		const data = await api.post('users', {
+		const data = await api.post<string>('users', {
 			email: email,
 			password: password,
 			name: name
 		});
 
-		return data.data as string;
+		return data;
 	}
-	catch(e){
+	catch(e: any){
 		console.log(e);
-		return 'Something went wrong';
+		return e.response;
 	}
 };

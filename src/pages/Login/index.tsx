@@ -29,9 +29,11 @@ export function LogIn(){
 		if(!password.value) return toast.error('You have to send a password');
 		const resultLogin = await tryLogin(email.value, password.value);
 		if(typeof resultLogin === 'string') return toast.error(resultLogin);
+		if(typeof resultLogin.data === 'string') return toast.error(resultLogin.data);
+		if(resultLogin.status !== 200) return toast.error('Something went wrong');
 		setLogData({
-			email: resultLogin.email,
-			name: resultLogin.name
+			email: resultLogin.data.email,
+			name: resultLogin.data.name
 		});
 		setTimeout(() => navigate('/'), 500);
 	}

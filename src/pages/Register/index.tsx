@@ -14,8 +14,14 @@ export function Register(){
 		const name = form.querySelector('#input-name') as HTMLInputElement;
 		const email = form.querySelector('#input-email') as HTMLInputElement;
 		const password = form.querySelector('#input-password') as HTMLInputElement;
+
+		if(!name.value || !email.value || !password.value) return toast.error('You have to send all the values');
+		if(password.value.length < 7 || password.value.length > 14) return toast.error('The password should have between 7 and 14 characters');
+
 		const resultReg = await register(email.value, password.value, name.value);
-		toast(resultReg);
+		if(typeof resultReg === 'string') return toast.error(`${resultReg} olaaaa`);
+		if(resultReg.status !== 200) return toast.error(resultReg.data);
+		toast.success(resultReg.data);
 	}
 	
 	return (
