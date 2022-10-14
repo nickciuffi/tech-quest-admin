@@ -1,0 +1,32 @@
+.quests-container{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    position: relative;
+    padding-top: 90px;
+    background-color: #404758;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 10px;
+
+    .questionaries-box{
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        border-top: 2px #fff solid;
+    }
+
+    .add-quest-btn{
+        transform: translateY(-100%);
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        padding: 10px;
+        position: absolute;
+        right: 30px;
+        border: 2px solid #fff;
+        color: #fff;
+        background-color: #41568c;
+    }
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import { AddAuthoEmails } from './pages/AddAuthoEmails';
+import { AuthoEmails } from './pages/AuthoEmails';
 import { ErrorPage } from './pages/ErrorPage';
 import { LogIn } from './pages/Login';
 import { MainPage } from './pages/MainPage';
@@ -17,6 +19,14 @@ export const router = createBrowserRouter([
 	{
 		path: '/register',
 		element: <Register />,
+	},
+	{
+		path: '/authorized-emails',
+		element: <AuthoEmails />,
+	},
+	{
+		path: '/authorized-emails/add',
+		element: <AddAuthoEmails />
 	},
 	{
 		path: '*',

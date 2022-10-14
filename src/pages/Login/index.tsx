@@ -56,7 +56,7 @@ export function LogIn(){
 					</Form.Group>
 					
 					<Button className='mt-1' variant="primary" type="submit">
-						Submit
+						Log In
 					</Button>
 					<Form.Group className="mt-3">
 						<Form.Text>Don`t have an acount? <Link to={'/register'}>Register</Link></Form.Text>

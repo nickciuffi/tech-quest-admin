@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { SideNav } from '../../components/SideNav';
 import './styles.scss';
+import { Questionaries } from '../../components/Questionaries';
 
 export function MainPage(){
 
@@ -22,7 +23,10 @@ export function MainPage(){
 		<>
 			<Header />
 			<SideNav />
-			<div className='main-container'><form><div>Salv {logData.name}</div></form></div>
+			<div className='main-container'>
+				<h1 className='title'>Questionaries</h1>
+				<Questionaries />
+			</div>
 			
 		</>
 	);

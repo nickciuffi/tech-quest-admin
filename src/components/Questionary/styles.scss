@@ -1,0 +1,22 @@
+.quest-item{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px #fff solid;
+    margin-top: 2px;
+    align-items: center;
+    padding: 12px 30px;
+
+    button{
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        aspect-ratio: 1/1;
+        display: flex;
+    }
+
+    p{
+        margin: 0;
+        cursor: pointer;
+    }
+}

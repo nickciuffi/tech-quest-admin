@@ -17,7 +17,7 @@ export const register = async (email: string, password: string, name: string): P
 		return data;
 	}
 	catch(e: any){
-		console.log(e);
+		if(!e.response) return ('something went wrong');
 		return e.response;
 	}
 };

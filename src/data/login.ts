@@ -15,8 +15,8 @@ export const tryLogin = async (email: string, password: string): Promise<AxiosRe
 
 		return data;
 	}
-	catch(e){
-		console.log(e);
-		return 'Something went wrong';
+	catch(e: any){
+		if(!e.response) return 'somwething went wrong';
+		return e.response;
 	}
 };
