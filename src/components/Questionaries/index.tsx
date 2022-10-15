@@ -1,15 +1,20 @@
 import React from 'react';
 import { getAllQuestionaries } from '../../data/getQuestionaries';
 import { QuestionaryProps } from '../../types/questionary';
-import { Questionary } from '../Questionary';
 import './styles.scss';
 import {VscAdd} from 'react-icons/vsc';
 import { AddButton } from '../AddButton';
 import { toast } from 'react-toastify';
+import { ListItem } from '../ListItem';
+import { ListCont } from '../ListCont';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import api from '../../axios/config';
 
 export function Questionaries(){
 
 	const [quests, setQuests] = React.useState<QuestionaryProps[]>([]);
+	const navigator = useNavigate();
 
 	React.useEffect(() => {
 		handleGetQuestionaries();
@@ -21,13 +26,35 @@ export function Questionaries(){
 		return setQuests(data.data);
 	}
 
-	return(
-		<div className='quests-container'>
-			<AddButton callback={() => {toast('add');}} />
+	function handleQuestClick(){
+		console.log('Clicou');
+	}
+	function handleDelete(id: string){
+		Swal.fire({
+			title: 'Are you sure you want to delete this questionary?',
+			showCancelButton: true,
+			confirmButtonText: 'Delete'
+		}).then(async (result) => {
+			if(result.isConfirmed){
+				try{
+					const data = await api.delete<string>(`questionaries/${id}`);
+					handleGetQuestionaries();
+					return toast.success(data.data);
+				}catch(e: any){
+					if(!e.response) return toast('Something went wrong');
+					return toast.error(e.response);
+				}
+			}
+		});
+	}
 
-			<div className='questionaries-box'>
-				{quests.map(quest => <Questionary title={quest.title} id={quest.id} key={quest.id}/>)}
-			</div>
-		</div>
+	function handleAddClick(){
+		navigator('/questionaries/add');
+	}
+
+	return(
+		<ListCont callbackAddButton={handleAddClick}>
+			{quests.map(quest => <ListItem text={quest.title} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleQuestClick}/>)}
+		</ListCont>
 	);
 }
