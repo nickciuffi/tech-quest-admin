@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CtxProps, logInfo } from '../../App';
 import {Link, useNavigate } from 'react-router-dom';
@@ -18,6 +18,11 @@ export function LogIn(){
 	const {logData, setLogData} = useContext(logInfo) as CtxProps;
 	const navigate = useNavigate();
 
+	React.useEffect(() => {
+		if(!logData.email) return; 
+		navigate('/');
+	}, [logData]);
+
 	async function handleLogin(e: React.FormEvent<HTMLFormElement>){
 		e.preventDefault();
 		
@@ -35,7 +40,8 @@ export function LogIn(){
 			email: resultLogin.data.email,
 			name: resultLogin.data.name
 		});
-		setTimeout(() => navigate('/'), 500);
+		/*localStorage.setItem('email', resultLogin.data.email);
+		localStorage.setItem('name', resultLogin.data.name);*/
 	}
 
 	return(

@@ -6,6 +6,7 @@ import { AuthoEmails } from './pages/AuthoEmails';
 import { ErrorPage } from './pages/ErrorPage';
 import { LogIn } from './pages/Login';
 import { MainPage } from './pages/MainPage';
+import { Questionary } from './pages/Questionary';
 import { Register } from './pages/Register';
 
 export const router = createBrowserRouter([
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
 	{
 		path: '/questionaries/add',
 		element: <AddQuestionaries />
+	},
+	{
+		path: '/questionary/:id',
+		element: <Questionary />
 	},
 	{
 		path: '/login',

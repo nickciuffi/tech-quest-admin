@@ -9,3 +9,17 @@ html, body, #root{
     background: rgb(60, 60, 60);
     color: #fff;
 }
+
+.main-container{
+    padding-top:110px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+button:hover{
+    filter: brightness(0.8);
+    transition: 0.3s all;
+}

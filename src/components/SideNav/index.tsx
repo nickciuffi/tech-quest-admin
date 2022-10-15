@@ -10,11 +10,11 @@ export function SideNav(){
 
 	const {logData, setLogData} = useContext(logInfo) as CtxProps;
 	const [isHiden, setIsHiden] = React.useState(true);
-	const navigate = useNavigate();
+	const navigator = useNavigate();
 
 	function handleLogOut(){
 		setLogData({});
-		navigate('/login');
+		navigator('/login');
 	}
 
 	return (
@@ -24,7 +24,7 @@ export function SideNav(){
 				<AiOutlineArrowLeft size={32} display={isHiden ? 'none' : 'block'} />
 			</button>
 			<div>{logData.name}</div>
-			<div><Link to={'/authorized-emails'} className="link-autho">Authorized emails</Link></div>
+			<div><button className='link-autho' onClick={() => navigator('/authorized-emails')}>Authorized emails</button></div>
 			<div><button className='log-out-btn' onClick={handleLogOut}>Log Out</button></div>
 		</div>
 	);

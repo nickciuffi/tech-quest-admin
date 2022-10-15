@@ -1,12 +1,10 @@
-import React, {useEffect, useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CtxProps, logInfo } from '../../App';
-import { useNavigate } from 'react-router-dom';
-import { Header } from '../../components/Header';
+import {Header} from '../../components/Header';
 import { SideNav } from '../../components/SideNav';
-import './styles.scss';
-import { Questionaries } from '../../components/Questionaries';
 
-export function MainPage(){
+export function Questionary(){
 
 	const {logData} = useContext(logInfo) as CtxProps;
 	const navigator = useNavigate();
@@ -18,15 +16,16 @@ export function MainPage(){
 		}
 	}, []);
 
+	const params = useParams();
+
 	return (
 		<>
 			<Header />
 			<SideNav />
 			<div className='main-container'>
-				<h1 className='title'>Questionaries</h1>
-				<Questionaries />
+				<div>{params.id}</div>
 			</div>
-			
 		</>
 	);
+
 }

@@ -2,8 +2,6 @@ import React from 'react';
 import { getAllQuestionaries } from '../../data/getQuestionaries';
 import { QuestionaryProps } from '../../types/questionary';
 import './styles.scss';
-import {VscAdd} from 'react-icons/vsc';
-import { AddButton } from '../AddButton';
 import { toast } from 'react-toastify';
 import { ListItem } from '../ListItem';
 import { ListCont } from '../ListCont';

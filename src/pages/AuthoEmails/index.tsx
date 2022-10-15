@@ -7,22 +7,25 @@ import { AuthoProps } from '../../types/authorizedEmails';
 import { getAllAuthorizedEmails } from '../../data/getAuthorizedEmails';
 import { useNavigate } from 'react-router-dom';
 import { SideNav } from '../../components/SideNav';
-import { AddButton } from '../../components/AddButton';
 import Swal from 'sweetalert2';
 import api from '../../axios/config';
 import { ListItem } from '../../components/ListItem';
 import { ListCont } from '../../components/ListCont';
+import { CtxProps, logInfo } from '../../App';
 
 export function AuthoEmails(){
 
 	const [authoEmails, setAuthoEmails] = React.useState<AuthoProps[]>([]);
 	const navigator = useNavigate();
-
-	function  hidratateEmails() {
+	const {logData} = React.useContext(logInfo) as CtxProps;
+	
+	React.useEffect(() => {
 		handleGetAuthoEmails();
-	}
-
-	React.useEffect(hidratateEmails, []);
+		if(logData.email === undefined){
+		
+			navigator('/login');
+		}
+	}, []);
 
 	async function handleGetAuthoEmails(){
 		const data = await getAllAuthorizedEmails();

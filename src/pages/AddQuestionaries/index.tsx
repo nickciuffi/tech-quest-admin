@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Header } from '../../components/Header';
 import Button from 'react-bootstrap/Button';
@@ -6,8 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { SideNav } from '../../components/SideNav';
 import { addQuestionary } from '../../data/addQuestionary';
+import { CtxProps, logInfo } from '../../App';
+import { useNavigate } from 'react-router-dom';
 
 export function AddQuestionaries(){
+
+	const {logData} = useContext(logInfo) as CtxProps;
+	const navigator = useNavigate();
+
+	React.useEffect(() => {
+		if(logData.email === undefined){
+		
+			navigator('/login');
+		}
+	}, []);
 
 	async function handleAddQuest(e: React.FormEvent<HTMLFormElement>){
 		e.preventDefault();
