@@ -1,37 +1,40 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Header } from '../../components/Header';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-toastify';
-import { addAuthoEmail } from '../../data/addAuthoEmail';
 import { SideNav } from '../../components/SideNav';
 import { CtxProps, logInfo } from '../../App';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import './styles.scss';
+import { addQuestion } from '../../data/addQuestion';
 import { BackButton } from '../../components/BackButton';
-
-export function AddAuthoEmails(){
+export function AddQuestions(){
 
 	const {logData} = useContext(logInfo) as CtxProps;
 	const navigator = useNavigate();
+	const params = useParams();
 
-	useEffect(() => {
+	React.useEffect(() => {
 		if(logData.email === undefined){
 		
 			navigator('/login');
 		}
 	}, []);
 
-	async function handleAddAutho(e: React.FormEvent<HTMLFormElement>){
+	async function handleAddQuest(e: React.FormEvent<HTMLFormElement>){
 		e.preventDefault();
+		if(!params.id) return toast.error('You need a questionary id'); 
+
 		const form = e.target as HTMLFormElement;
-		const email = form.querySelector('#input-email') as HTMLInputElement;
-		if(!email.value) return toast.error('You have to send an email'); 
-		const data = await addAuthoEmail(email.value);
+		const text = form.querySelector('#input-text') as HTMLInputElement;
+		if(!text.value) return toast.error('You have to send a question'); 
+		const data = await addQuestion(text.value, `${params.id}`);
 		if(typeof data === 'string') return toast.error(data);
 		if(typeof data.data === 'string') return toast.error(data.data);
-		email.value = '';
-		return toast.success('Email added');
+		text.value = '';
+		return toast.success('Question added');
 	}
 
 	return (
@@ -40,21 +43,22 @@ export function AddAuthoEmails(){
 			<SideNav />
 			<BackButton />
 			<div className='container'>
-				<h1>Add Authorized Emails</h1>
-				<Form id="form" onSubmit={(e) => handleAddAutho(e)}>
-					<Form.Group className="mb-3" controlId="input-email">
-						<Form.Label>Email</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" />
+				<h1 className='title'>Add Questions to Questionary {params.id}</h1>
+				<Form id="form" onSubmit={(e) => handleAddQuest(e)}>
+					<Form.Group className="mb-3" controlId="input-text">
+						<Form.Label>Question</Form.Label>
+						<Form.Control type="text" placeholder="Enter title" />
 						
 					</Form.Group>
-
+				
+				
 					<Button className='mt-1' variant="primary" type="submit">
 						Add
 					</Button>
 					
 				</Form>
-
 			</div>
+
 			<ToastContainer />
 		</>
 	);

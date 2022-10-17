@@ -9,7 +9,8 @@ export async function addQuestionary(title: string, desc: string): Promise<Axios
 		});
 		return data;
 	}
-	catch(e){
+	catch(e: any){
+		if(e.response.data.code === 'ER_DUP_ENTRY') return 'Duplicate title';
 		return 'something went wrong';		
 	}
 }

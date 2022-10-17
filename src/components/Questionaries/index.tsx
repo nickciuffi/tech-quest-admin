@@ -24,8 +24,8 @@ export function Questionaries(){
 		return setQuests(data.data);
 	}
 
-	function handleQuestClick(){
-		console.log('Clicou');
+	function handleQuestClick(id: string){
+		navigator(`questionary/${id}`);
 	}
 	function handleDelete(id: string){
 		Swal.fire({
