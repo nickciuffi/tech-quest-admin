@@ -71,9 +71,9 @@ export function Answers(){
 			<SideNav />
 			<BackButton />
 			<div className='main-container'>
-				<h1>{`Questions in Questionary ${params.id}`}</h1>
+				<h1>{`Answers in Question ${params.id}`}</h1>
 				<ListCont callbackAddButton={handleAddAnswer}>
-					{answers.map(ans => <ListItem text={ans.text} id={ans.id} key={ans.id} callbackDel={handleDelete} callbackItem={handleClickAnswer}/> )}
+					{answers.map(ans => <ListItem text={ans.text} isCorrect={ans.is_correct} id={ans.id} key={ans.id} callbackDel={handleDelete} callbackItem={handleClickAnswer}/> )}
 				</ListCont>
 			</div>
 			<ToastContainer />

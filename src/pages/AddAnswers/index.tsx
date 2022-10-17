@@ -7,7 +7,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { SideNav } from '../../components/SideNav';
 import { CtxProps, logInfo } from '../../App';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { addQuestion } from '../../data/addQuestion';
 import { BackButton } from '../../components/BackButton';
 import { addAnswer } from '../../data/addAnswer';
 
@@ -30,7 +29,7 @@ export function AddAnswers(){
 
 		const form = e.target as HTMLFormElement;
 		const text = form.querySelector('#input-text') as HTMLInputElement;
-		const isCorrect = form.quesrySelector('#input-is-correct') as HTMLInputElement;
+		const isCorrect = form.querySelector('#input-is-correct') as HTMLInputElement;
 		if(!text.value) return toast.error('You have to send an answer'); 
         
 		const data = await addAnswer(text.value, `${params.id}`, isCorrect.checked);
@@ -52,6 +51,9 @@ export function AddAnswers(){
 						<Form.Label>Answer</Form.Label>
 						<Form.Control type="text" placeholder="Enter title" />
 						
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="input-is-correct">
+						<Form.Check type="checkbox" label="Is Correct?" />
 					</Form.Group>
 				
 				
