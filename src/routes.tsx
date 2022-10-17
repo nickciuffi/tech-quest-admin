@@ -4,6 +4,7 @@ import { AddAnswers } from './pages/AddAnswers';
 import { AddAuthoEmails } from './pages/AddAuthoEmails';
 import { AddQuestionaries } from './pages/AddQuestionaries';
 import { AddQuestions } from './pages/AddQuestions';
+import { Answer } from './pages/Answer';
 import { Answers } from './pages/Answers';
 import { AuthoEmails } from './pages/AuthoEmails';
 import { ErrorPage } from './pages/ErrorPage';
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
 	{
 		path: '/answers/add/:id',
 		element: <AddAnswers />
+	},
+	{
+		path: '/answer/:id',
+		element: <Answer />
 	},
 	{
 		path: '*',

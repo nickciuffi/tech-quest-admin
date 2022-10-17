@@ -38,10 +38,14 @@ export function Answers(){
 
 	function handleAddAnswer(){
 		if(!params.id) return;
+		if(answers.length >= 4) return toast.error('You can`t have more than 4 answers for a question');
 		navigator(`/answers/add/${params.id}`);
 	}
 
 	async function handleDelete(id: string){
+
+		
+
 		Swal.fire({
 			title: 'Are you sure you want to delete this Answer?',
 			showCancelButton: true,

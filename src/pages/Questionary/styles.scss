@@ -64,3 +64,10 @@
     border: #fff 2px solid;
 
 }
+
+@media screen and (max-width: 760px) {
+    .edit-form{
+        width: 92%;
+        padding: 30px 20px;
+    }
+}

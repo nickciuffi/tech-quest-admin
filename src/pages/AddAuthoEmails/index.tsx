@@ -9,6 +9,7 @@ import { SideNav } from '../../components/SideNav';
 import { CtxProps, logInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
+import './styles.scss';
 
 export function AddAuthoEmails(){
 

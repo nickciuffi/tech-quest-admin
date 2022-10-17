@@ -7,5 +7,11 @@
     border: #fff 2px solid;
     color: #fff;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 760px) {
+    .back-button{
+    transform: translate(-35%, -30%);
+    }
 }

@@ -18,3 +18,9 @@
         border-top: 2px #fff solid;
     }
 }
+
+@media screen and (max-width: 760px) {
+    .list-container{
+        width: 90%;
+    }
+}
