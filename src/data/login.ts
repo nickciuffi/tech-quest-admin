@@ -1,5 +1,5 @@
 import api from '../axios/config';
-import {AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 
 type LoginProps = {
     email: string,
@@ -15,8 +15,12 @@ export const tryLogin = async (email: string, password: string): Promise<AxiosRe
 
 		return data;
 	}
-	catch(e: any){
-		if(!e.response) return 'somwething went wrong';
-		return e.response;
+	catch(e){
+		const errors = e as AxiosError | Error;
+		if(!axios.isAxiosError(errors)){
+			return errors.message;
+		}
+		if(!errors.response) return 'Something went wrong';
+		return errors.response;
 	}
 };

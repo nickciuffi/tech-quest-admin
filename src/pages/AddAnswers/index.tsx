@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { SideNav } from '../../components/SideNav';
 import { CtxProps, logInfo } from '../../App';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BackButton } from '../../components/BackButton';
 import { addAnswer } from '../../data/addAnswer';
 

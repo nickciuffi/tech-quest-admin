@@ -12,6 +12,7 @@ import { ListItem } from '../../components/ListItem';
 import { ListCont } from '../../components/ListCont';
 import { CtxProps, logInfo } from '../../App';
 import { BackButton } from '../../components/BackButton';
+import axios, { AxiosError } from 'axios';
 
 export function AuthoEmails(){
 
@@ -48,9 +49,14 @@ export function AuthoEmails(){
 					const data = await api.delete<string>(`autorized-emails/${id}`);
 					handleGetAuthoEmails();
 					return toast.success(data.data);
-				}catch(e: any){
-					if(!e.response) return toast('Something went wrong');
-					return toast.error(e.response);
+				}catch(e){
+					const errors = e as AxiosError | Error;
+					if(!axios.isAxiosError(errors)){
+						return errors.message;
+					}
+					
+					if(!errors.response) return toast('Something went wrong');
+					return toast.error(errors.response.data);
 				}
 			}
 		});

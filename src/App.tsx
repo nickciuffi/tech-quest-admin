@@ -1,10 +1,8 @@
 
 import React, {useState, createContext} from 'react';
 import './App.scss';
-import { RouterProvider, useNavigate } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
-import { Header } from './components/Header';
-import { SideNav } from './components/SideNav';
 
 export type LogInfoProps = {
 	name?: string,

@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import api from '../axios/config';
 import { QuestionProps } from '../types/question';
 
@@ -6,9 +6,13 @@ export async function getQuestionsByQuestionary(id: string): Promise<AxiosRespon
 	try{
 		const data = await api.get<QuestionProps[]>(`/questions/questionary/${id}`); 
 		return data;
-	}
-	catch(e: any){
-		if(!e.response) return 'Something went wrong';
-		return e.response;
+	}catch(e){
+		const errors = e as AxiosError | Error;
+		if(!axios.isAxiosError(errors)){
+			return errors.message;
+		}
+		if(!errors.response) return 'something went wrong';
+		return errors.response;
+
 	}
 }

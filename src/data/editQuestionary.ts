@@ -12,9 +12,13 @@ export async function editQuestionary({title, id, description}:QuestionaryProps)
 		});
 		return data;
 	}
-	catch(e: any){
-		if(!e.response) return 'something went wrong';
-		if(e.response.data.code === 'ER_DUP_ENTRY') return 'Duplicate title';
-		return e.response;
+	catch(e){
+		const errors = e as AxiosError | Error;
+		if(!axios.isAxiosError(errors)){
+			return errors.message;
+		}
+		if(!errors.response) return 'something went wrong';
+		if(errors.response.data.code === 'ER_DUP_ENTRY') return 'Duplicate title';
+		return errors.response;
 	}
 }

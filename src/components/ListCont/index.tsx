@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
-import { toast } from 'react-toastify';
 import { AddButton } from '../AddButton';
-import { ListItem } from '../ListItem';
 import './styles.scss';
 
 type ListContProps = {

@@ -12,6 +12,7 @@ import { CtxProps, logInfo } from '../../App';
 import { BackButton } from '../../components/BackButton';
 import { AnswerProps } from '../../types/answer';
 import { getAnswersByQuestion } from '../../data/getAnswersByQuestion';
+import axios, { AxiosError } from 'axios';
 
 export function Answers(){
 
@@ -56,9 +57,13 @@ export function Answers(){
 					const data = await api.delete<string>(`answers/${id}`);
 					handleGetAnswersByQuestion();
 					return toast.success(data.data);
-				}catch(e: any){
-					if(!e.response) return toast('Something went wrong');
-					return toast.error(e.response);
+				}catch(e){
+					const errors = e as AxiosError | Error;
+					if(!axios.isAxiosError(errors)){
+						return errors.message;
+					}
+					if(!errors.response) return 'Something went wrong';
+					return errors.response;
 				}
 			}
 		});

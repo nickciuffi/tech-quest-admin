@@ -8,6 +8,7 @@ import { ListCont } from '../ListCont';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import api from '../../axios/config';
+import axios, { AxiosError } from 'axios';
 
 export function Questionaries(){
 
@@ -38,9 +39,14 @@ export function Questionaries(){
 					const data = await api.delete<string>(`questionaries/${id}`);
 					handleGetQuestionaries();
 					return toast.success(data.data);
-				}catch(e: any){
-					if(!e.response) return toast('Something went wrong');
-					return toast.error(e.response);
+				}catch(err){
+					const errors = err as Error | AxiosError;
+					if(!axios.isAxiosError(errors)){
+						return errors.message;
+					}
+
+					if(!errors.response) return toast('Something went wrong');
+					return toast.error(errors.response.data);
 				}
 			}
 		});

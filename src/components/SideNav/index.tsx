@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import { Link } from 'react-router-dom';
 import { CtxProps, logInfo } from '../../App';
 import './styles.scss';
 import {GiHamburgerMenu} from 'react-icons/gi';

@@ -11,9 +11,13 @@ export async function editQuestion(text: string, id: string): Promise<AxiosRespo
 		});
 		return data;
 	}
-	catch(e: any){
-		if(!e.response) return 'something went wrong';
+	catch(e){
+		const errors = e as AxiosError | Error;
+		if(!axios.isAxiosError(errors)){
+			return errors.message;
+		}
+		if(!errors.response) return 'something went wrong';
 		
-		return e.response;
+		return errors.response;
 	}
 }

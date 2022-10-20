@@ -6,9 +6,7 @@ import { BackButton } from '../../components/BackButton';
 import { Header } from '../../components/Header';
 import { SideNav } from '../../components/SideNav';
 import { editAnswer } from '../../data/editAnswer';
-import { editQuestion } from '../../data/editQuestion';
 import { getAnswerInfo } from '../../data/getAnswerInfo';
-import { getQuestionInfo } from '../../data/getQuestionInfo';
 import './styles.scss';
 
 export function Answer(){
@@ -49,7 +47,7 @@ export function Answer(){
 		const data = await editAnswer({
 			id: Number(params.id),
 			text, 
-			isCorrect,
+			isCorrect: Boolean(isCorrect),
 			QId: ansInfo.data.question_id
 		});
 		if( typeof data === 'string') return toast.error(data);
@@ -64,7 +62,7 @@ export function Answer(){
 			<SideNav />
 			<BackButton />
 			<div className='main-container'>
-				<h1 className='title'>Edit Question</h1>
+				<h1 className='title'>Edit Answer</h1>
 				<form className='edit-form' onSubmit={e => handleSubmit(e)}>
 					<div className='edit-part'>
 						<span>Question:</span>

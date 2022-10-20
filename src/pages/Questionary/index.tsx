@@ -1,3 +1,4 @@
+import axios, { AxiosError } from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -46,8 +47,16 @@ export function Questionary(){
 			if(data.data === 0) return toast.error('Something went wrong');
 			return toast.success('Questionary edited');
 		}
-		catch(e: any){
-			if(e.response.data.code === 'ER_DUP_ENTRY') return toast.error('Duplicate title');
+		catch(e){
+			const errors = e as AxiosError | Error;
+			if(!axios.isAxiosError(errors)){
+				return errors.message;
+			}
+			if(!errors.response) return toast.error('Something went wrong');
+			if(errors.response.data.code === 'ER_DUP_ENTRY') return toast.error('Duplicate title');
+			return toast.error(errors.response.data);
+		
+			
 		}
 		
 	}

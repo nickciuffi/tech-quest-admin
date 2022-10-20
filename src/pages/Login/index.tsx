@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CtxProps, logInfo } from '../../App';
 import {Link, useNavigate } from 'react-router-dom';
@@ -40,8 +40,6 @@ export function LogIn(){
 			email: resultLogin.data.email,
 			name: resultLogin.data.name
 		});
-		/*localStorage.setItem('email', resultLogin.data.email);
-		localStorage.setItem('name', resultLogin.data.name);*/
 	}
 
 	return(

@@ -1,10 +1,6 @@
 import api from '../axios/config';
-import { AxiosError, AxiosResponse }from 'axios';
+import axios, { AxiosError, AxiosResponse }from 'axios';
 
-type RegisterProps = {
-    email: string,
-    name: string
- }
 
 export const register = async (email: string, password: string, name: string): Promise<AxiosResponse<string> | string> =>{
 	try{
@@ -15,9 +11,13 @@ export const register = async (email: string, password: string, name: string): P
 		});
 
 		return data;
-	}
-	catch(e: any){
-		if(!e.response) return ('something went wrong');
-		return e.response;
+	}catch(e){
+		const errors = e as AxiosError | Error;
+		if(!axios.isAxiosError(errors)){
+			return errors.message;
+		}
+		if(!errors.response) return 'something went wrong';
+		return errors.response;
+
 	}
 };
