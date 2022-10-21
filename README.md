@@ -19,3 +19,4 @@ This was a very laborious part of the project, where I cound learn many things a
 # Take a look
 
 Link: https://tech-quest-admin.nickciuffi.xyz/
+Please create an acount with the email: githubvisitor@gmail.com
