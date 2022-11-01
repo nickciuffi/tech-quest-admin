@@ -58,7 +58,7 @@ export function Questionaries(){
 
 	return(
 		<ListCont callbackAddButton={handleAddClick}>
-			{quests.map(quest => <ListItem text={quest.title} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleQuestClick}/>)}
+			{quests.map(quest => <ListItem isNotComplete={true} text={quest.title} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleQuestClick}/>)}
 		</ListCont>
 	);
 }

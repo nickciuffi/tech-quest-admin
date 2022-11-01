@@ -30,11 +30,32 @@
     }
 
     p{
-
+        position: relative;
         margin: 0;
         cursor: pointer;
+        display: flex;
+
+        .exclamation{
+            margin-left: 10px;
+            color: rgb(250, 51, 51);
+            width: min-content;
+
+        }
         
        
+    }
+
+    .message-incomplete{
+        position: absolute;
+        top: 0px;
+
+        transform: translate(30%, -110%);
+        width: 280px;
+        text-align: center;
+        background-color: gray;
+        padding: 3px;
+        border-radius: 5px;
+        display: none;
     }
 }
 
