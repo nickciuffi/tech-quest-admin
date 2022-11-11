@@ -39,6 +39,7 @@ export function Questions(){
 
 	function handleAddQuestion(){
 		if(!params.id) return;
+		if(questions.length >= 4) return toast.error('You can´t have more than 4 questions');
 		navigator(`/questions/add/${params.id}`);
 	}
 
@@ -79,7 +80,7 @@ export function Questions(){
 			<div className='main-container'>
 				<h1>{`Questions in Questionary ${params.id}`}</h1>
 				<ListCont callbackAddButton={handleAddQuestion}>
-					{questions.map(quest => <ListItem isNotComplete={!quest.isComplete} text={quest.text} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleClickQuestion}/> )}
+					{questions.map(quest => <ListItem notCompleteMsg={'This Question is not complete'} isNotComplete={!quest.isComplete} text={quest.text} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleClickQuestion}/> )}
 				</ListCont>
 			</div>
 			<ToastContainer />

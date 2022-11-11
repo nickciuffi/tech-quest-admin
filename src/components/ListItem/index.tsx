@@ -9,10 +9,11 @@ type ListItemProps = {
     callbackItem: (id: string) => void,
     id: number,
 	isCorrect?:boolean,
-	isNotComplete?: boolean
+	isNotComplete?: boolean,
+	notCompleteMsg?:string
 }
 
-export function ListItem({text, callbackDel, callbackItem, id, isCorrect, isNotComplete}: ListItemProps){
+export function ListItem({text, callbackDel, callbackItem, id, isCorrect, isNotComplete, notCompleteMsg}: ListItemProps){
 
 	function handleMouseOverExclamation(e: React.MouseEvent){
 		const image = e.target as HTMLElement;
@@ -48,7 +49,7 @@ export function ListItem({text, callbackDel, callbackItem, id, isCorrect, isNotC
 					
 				><BsFillExclamationCircleFill size={20} /></div>}
 			
-				<span className='message-incomplete'>This Questionary is not complete!</span>
+				<span className='message-incomplete'>{notCompleteMsg}</span>
 			</p>
 			<button onClick={() => callbackDel(`${id}`)}><AiFillDelete size={25}/></button>
 		</div>
