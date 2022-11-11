@@ -79,7 +79,7 @@ export function Questions(){
 			<div className='main-container'>
 				<h1>{`Questions in Questionary ${params.id}`}</h1>
 				<ListCont callbackAddButton={handleAddQuestion}>
-					{questions.map(quest => <ListItem text={quest.text} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleClickQuestion}/> )}
+					{questions.map(quest => <ListItem isNotComplete={!quest.isComplete} text={quest.text} id={quest.id} key={quest.id} callbackDel={handleDelete} callbackItem={handleClickQuestion}/> )}
 				</ListCont>
 			</div>
 			<ToastContainer />
